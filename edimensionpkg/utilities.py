@@ -9,6 +9,7 @@ def copyfileobjprint(fsrc, fdst, length=16 * 1024):
     start = time.time()
     time_interval = 0.1
     prev_tick = start
+    copied = 0
 
     while 1:
         buf = fsrc.read(length)
@@ -21,8 +22,11 @@ def copyfileobjprint(fsrc, fdst, length=16 * 1024):
         if not buf:
             break
         fdst.write(buf)
+        copied += len(buf)
     print()
-    print("Time taken: {0:.2f}".format(time.time() - start))
+    time_taken = time.time() - start
+    print("Time taken: {0:.2f} - File size: {0:.2f}".format(time_taken,
+                                                            copied))
 
 
 def timeit(func):

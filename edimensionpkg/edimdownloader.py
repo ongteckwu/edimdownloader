@@ -126,7 +126,7 @@ class EDimensionDownloader(object):
     def __enter__(self):
         return self
 
-    def __exit__(self):
+    def __exit__(self, a, b, c):
         if not self.on_exit:
             self._on_exit()
 
@@ -326,5 +326,5 @@ if __name__ == "__main__":
         if JSONFILE == "cache.json":  # If JSONFILE is the default
             JSONFILE = doc_arguments["-j"]
 
-    ed = EDimensionDownloader(USERNAME, PASSWORD, DIRNAME, JSONFILE)
-    ed.run()
+    with EDimensionDownloader(USERNAME, PASSWORD, DIRNAME, JSONFILE) as ed:
+        ed.run()
