@@ -46,7 +46,7 @@ def read_requirements(filename='requirements.txt'):
         return list(map(extract_requirement, filter(valid_line, lines)))
 
 setup(
-    name='eDimension Downloader',
+    name='edimdownloader',
     version=edimensionpkg.__version__,
     description='A downloader for Edimension',
     long_description=long_description,
@@ -57,8 +57,6 @@ setup(
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Intended Audience :: Students',
-        'Topic :: Software :: Productivity',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
