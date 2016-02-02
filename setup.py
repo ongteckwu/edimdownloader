@@ -18,7 +18,7 @@ with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
-def read_requirements(filename='requirements.txt'):
+def read_requirements(filename=os.path.join(here, 'requirements.txt')):
     """Reads the list of requirements from given file.
     :param filename: Filename to read the requirements from.
                      Uses ``'requirements.txt'`` by default.
