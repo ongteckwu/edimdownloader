@@ -1,8 +1,8 @@
 # Edimdownloader
 Terminal downloader for SUTD's 2016 Edimension. 
 
-###Usage
-___
+##Usage
+
     edimdownloader <username> <password> <dirname>
 
 `<password>` - your edimension password.  
@@ -15,8 +15,7 @@ ___
     edimdownloader --help
 
 
-###Getting Started
-___
+##Getting Started
 To install the package:
 
   >For Python 2.x:
@@ -27,7 +26,6 @@ To install the package:
   
     pip install edimdownloader
     
-###License
-___
+##License
 MIT/X11
 
