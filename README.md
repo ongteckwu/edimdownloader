@@ -12,7 +12,7 @@ Can be set to run every xx seconds/minutes/hours to download new content. (Use G
 
 
 ##Getting Started
-To install the package:
+To install the package (From either **terminal** or **command prompt**):
 
   >For Python 2.x:
     
