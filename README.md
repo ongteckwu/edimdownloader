@@ -1,6 +1,17 @@
 # Edimdownloader
 Terminal downloader for SUTD's 2016 [Edimension](https://www.edimension.sutd.edu.sg). 
 
+##Getting Started
+To install the package:
+
+  >For Python 2.x:
+    
+    pip install edimdownloader
+    
+  >For Python 3.x:
+  
+    pip3 install edimdownloader
+
 ##Usage
 
     edimdownloader <username> <password> <dirname>
@@ -14,18 +25,6 @@ Terminal downloader for SUTD's 2016 [Edimension](https://www.edimension.sutd.edu
     
     edimdownloader --help
 
-
-##Getting Started
-To install the package:
-
-  >For Python 2.x:
-    
-    pip install edimdownloader
-    
-  >For Python 3.x:
-  
-    pip3 install edimdownloader
-    
 ##License
 MIT/X11
 
