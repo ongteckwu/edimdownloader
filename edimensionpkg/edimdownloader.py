@@ -7,7 +7,6 @@ Usage:
   edimdownloader (--default) [-q]
   edimdownloader (-u | <username>) (-p | <password>) (-d | <dirname>) [-j=<jsonfile>] [-q]
   edimdownloader --version
-  edimdownloader 
 
 
 Options:
@@ -290,13 +289,15 @@ class EDimensionDownloader(object):
                     # get extension of file
                     ext = mimetypes.guess_extension(r.headers['content-type'])
                     # check if course["id"] in self.json_dict
-                    ut.printWithIndent("Looking at " + text_file, indent, QUIET)
+                    ut.printWithIndent(
+                        "Looking at " + text_file, indent, QUIET)
                     if course["id"] not in self.json_dict:
                         # append course["id"] to self.json_dict for cache
                         self.json_dict[course["id"]] = 1
                         # start download
                         ut.printWithIndent("Downloading " + text_file, indent)
-
+                        if not ext:  # weird file
+                            continue
                         # path/to/dir/text_file.ext
                         if not text_file.endswith(ext):
                             filename = os.path.join(
