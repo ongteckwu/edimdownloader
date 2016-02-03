@@ -23,6 +23,7 @@ Options:
   -d --dirdefault   Use default directory in DIRNAME
 
 """
+
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
@@ -35,12 +36,12 @@ import requests
 import urllib
 import os
 import re
-import utilities
 import json
 import codecs
 import mimetypes
 from docopt import docopt
 from bs4 import BeautifulSoup
+from edimensionpkg import utilities
 
 standard_library.install_aliases()
 

@@ -31,16 +31,16 @@ def main(args=None):
             raise EDException("DIRNAME not found.")
     # check username exists
     if not JSONFILE:  # JSONFILE does not already exist
-        JSONFILE = doc_arguments["<jsonfile>"]
+        JSONFILE = doc_arguments["-j"]
     else:
         if JSONFILE == "cache.json":  # If JSONFILE is the default
-            JSONFILE = doc_arguments["<jsonfile>"]
+            JSONFILE = doc_arguments["-j"]
 
     with edimdownloader.EDimensionDownloader(USERNAME,
                                              PASSWORD,
                                              DIRNAME,
                                              JSONFILE) as ed:
-    	ed.run()
+        ed.run()
 
 
 if __name__ == "__main__":
