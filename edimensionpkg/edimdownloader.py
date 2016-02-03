@@ -50,6 +50,7 @@ standard_library.install_aliases()
 
 mimetypes.init()
 
+QUIET = False
 
 class EDimensionDownloader(object):
 
@@ -332,7 +333,6 @@ if __name__ == "__main__":
     PASSWORD = None
     DIRNAME = "testED"
     JSONFILE = "cache.json"
-    QUIET = False
 
     doc_arguments = docopt(__doc__, version="E Dimension Downloader 1.1")
     if doc_arguments["--quiet"]:
