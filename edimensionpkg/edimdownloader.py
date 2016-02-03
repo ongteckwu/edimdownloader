@@ -2,11 +2,11 @@
 """EEE Dimension Downloader
 
 Usage:
-  yeeDimDownloader.py (-h | --help)
-  yeeDimDownloader.py <username> <password> <dirname> [-j=<jsonfile>]
-  yeeDimDownloader.py (--default)
-  yeeDimDownloader.py (-u | <username>) (-p | <password>) (-d | <dirname>) [-j=<jsonfile>]
-  yeeDimDownloader.py --version
+  edimdownloader (-h | --help)
+  edimdownloader <username> <password> <dirname> [-j=<jsonfile>]
+  edimdownloader (--default)
+  edimdownloader (-u | <username>) (-p | <password>) (-d | <dirname>) [-j=<jsonfile>]
+  edimdownloader --version
 
 
 Options:

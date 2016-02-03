@@ -21,7 +21,7 @@ setup(
     version=edimensionpkg.__version__,
     description='A downloader for Edimension',
     long_description=long_description,
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/ongteckwu/edimdownloader',
     author=edimensionpkg.__author__,
     author_email='teckwu_ong@mymail.sutd.edu.sg',
     license=edimensionpkg.__license__,
