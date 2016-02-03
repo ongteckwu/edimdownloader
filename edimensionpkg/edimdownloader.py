@@ -27,12 +27,12 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
-from builtins import dict
-from builtins import open
+from future.builtins import dict
+from future.builtins import open
 from future import standard_library
 
 import requests
-import urllib.parse
+import urllib
 import os
 import re
 import utilities
@@ -100,9 +100,9 @@ class EDimensionDownloader(object):
                                 data={"tab_tab_group_id": "_1_1"})
         login_soup = BeautifulSoup(r.text, "html.parser")
         # get course listing ajax parameters
-        div3_1 = login_soup.select_one("#div_3_1")
+        div3_1 = login_soup.select("#div_3_1")[0]
         div_parent = div3_1.find_parent("div", recursive=False)
-        script = div_parent.select_one("script").getText()
+        script = div_parent.select("script")[0].getText()
         search_res = re.search("'action=.+?'", script)
         parameters = search_res.group(0)[1:-1]
         # format parameters
@@ -165,15 +165,19 @@ class EDimensionDownloader(object):
         """
         print("Searching course listing...")
 
-        course_listing = soup.select_one(".courseListing")
+        course_listing = soup.select(".courseListing")
 
         if not course_listing:
             print("Directory empty.")
         else:
+            course_listing = course_listing[0]
             # To get a formatted version of the module name
             mod_name_format = re.compile(": .+?$")
             for course in course_listing.find_all("li", recursive=False):
-                a = course.select_one("a")
+                a = course.select("a")
+                if not a:
+                    continue
+                a = a[0]
                 url = a.get("href").strip()
                 text = a.getText().strip()
                 # Format text
@@ -201,14 +205,19 @@ class EDimensionDownloader(object):
             absdir = self.dirname
 
         print("Searching course menu...")
-        course_menu = soup.select_one(".courseMenu")
+        course_menu = soup.select(".courseMenu")
+
         course_list = {}
 
         if not course_menu:
             print("Directory empty.")
         else:
+            course_menu = course_menu[0]
             for course in course_menu.find_all("li", recursive=False):
-                a = course.select_one("a")
+                a = course.select("a")
+                if not a:
+                    continue
+                a = a[0]
                 url = a.get("href").strip()
                 text = a.getText().strip()
                 # skip home page
@@ -239,16 +248,20 @@ class EDimensionDownloader(object):
             absdir = self.dirname
 
         print("Searching content list...")
-        course_listing = soup.select_one(".contentList")
+        course_listing = soup.select(".contentList")
+        if course_listing:
+            course_listing = course_listing[0]
 
         if not course_listing:
             print("Directory empty.")
         else:
             for course in course_listing.find_all("li", recursive=False):
                 # recursive False: only direct children
-                a = course.select_one("a")
+                a = course.select("a")
                 if not a:  # no link
                     continue
+                else:
+                    a = a[0]
                 url = a.get("href").strip()
                 text_file = self.text_sanitize(a.getText().strip())
                 abs_url = self.new_urljoin(self.url, url)
