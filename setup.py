@@ -13,37 +13,8 @@ import edimensionpkg
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-# Get the long description from the README file
-with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
-
-
-def read_requirements(filename=os.path.join(here, 'requirements.txt')):
-    """Reads the list of requirements from given file.
-    :param filename: Filename to read the requirements from.
-                     Uses ``'requirements.txt'`` by default.
-    :return: Requirments as list of strings.
-    """
-    # allow for some leeway with the argument
-    if not filename.startswith('requirements'):
-        filename = 'requirements-' + filename
-    if not os.path.splitext(filename)[1]:
-        filename += '.txt'  # no extension, add default
-
-    def valid_line(line):
-        line = line.strip()
-        return line and not any(line.startswith(p) for p in ('#', '-'))
-
-    def extract_requirement(line):
-        egg_eq = '#egg='
-        if egg_eq in line:
-            _, requirement = line.split(egg_eq, 1)
-            return requirement
-        return line
-
-    with open(filename) as f:
-        lines = f.readlines()
-        return list(map(extract_requirement, filter(valid_line, lines)))
 
 setup(
     name='edimdownloader',
@@ -68,15 +39,16 @@ setup(
 
     keywords='sutd edimension',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=read_requirements(),
+    install_requires=["future",
+                      "requests",
+                      "beautifulsoup4",
+                      "docopt",
+                      "lxml"],
     # extras_require={
     #     'dev': ['check-manifest'],
     #     'test': ['coverage'],
     # },
 
-    # To provide executable scripts, use entry points in preference to the
-    # "scripts" keyword. Entry points provide cross-platform support and allow
-    # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
             'edimdownloader = edimensionpkg.__main__:main',
