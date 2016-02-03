@@ -8,7 +8,6 @@ Usage:
   edimdownloader (-u | <username>) (-p | <password>) (-d | <dirname>) [-j=<jsonfile>] [-q]
   edimdownloader --version
 
-
 Options:
   -h --help         Show this screen.
   --version         Show version.
