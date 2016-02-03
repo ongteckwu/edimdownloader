@@ -65,7 +65,7 @@ class EDimensionDownloader(object):
         # if dirname is not absolute,
         # change it to absolute
         if not os.path.isabs(self.dirname):
-            self.dirname = os.path.join(utilities.getFileDir(), self.dirname)
+            self.dirname = os.path.join(os.getcwd(), self.dirname)
         # make dir is dir does not exist
         if not os.path.isdir(self.dirname):
             os.mkdir(self.dirname)
