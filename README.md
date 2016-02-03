@@ -7,7 +7,7 @@ Terminal downloader for SUTD's 2016 [Edimension](https://www.edimension.sutd.edu
 
 `<password>` - your edimension password.  
 `<username>` - your edimension username.    
-`<dirname>` &nbsp;  - the directory in which files are to be saved.
+`<dirname>` &nbsp;  - the directory in which files are to be saved. (Path can be either absolute or relative)
 
   
 **For advanced usage options**:  
