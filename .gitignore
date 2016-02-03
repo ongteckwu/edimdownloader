@@ -1,6 +1,7 @@
 # general things to ignore
 build/
 dist/
+edimensionpkg/edtest
 *.egg-info/
 *.egg
 *.py[cod]
