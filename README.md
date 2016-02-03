@@ -12,6 +12,7 @@ To install the package:
   
     pip3 install edimdownloader
 
+  If you have no `pip`, visit [this link](https://pip.pypa.io/en/stable/installing/) on how to download `pip` for your os.
 ##Usage
 
     edimdownloader <username> <password> <dirname>
