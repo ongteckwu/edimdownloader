@@ -29,6 +29,11 @@ def copyfileobjprint(fsrc, fdst, length=16 * 1024):
                                                             copied))
 
 
+def printWithIndent(string, indent=0, quiet=False):
+    if not quiet:
+        print(' ' * indent + '- ' + string)
+
+
 def timeit(func):
     """
     This function is used to time function executions.

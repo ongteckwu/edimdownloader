@@ -12,6 +12,9 @@ def main(args=None):
     doc_arguments = docopt(
         edimdownloader.__doc__, version="E Dimension Downloader 1.0.0")
 
+    if doc_arguments["--quiet"]:
+        edimdownloader.QUIET = True
+        
     if doc_arguments["<username>"]:
         USERNAME = doc_arguments["<username>"]
     else:
