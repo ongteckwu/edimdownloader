@@ -1,5 +1,5 @@
 # Edimdownloader
-Terminal downloader for SUTD's 2016 Edimension. 
+Terminal downloader for SUTD's 2016 [Edimension](https://www.edimension.sutd.edu.sg). 
 
 ##Usage
 
@@ -24,7 +24,7 @@ To install the package:
     
   >For Python 3.x:
   
-    pip install edimdownloader
+    pip3 install edimdownloader
     
 ##License
 MIT/X11
