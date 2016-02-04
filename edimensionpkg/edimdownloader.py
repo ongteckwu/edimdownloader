@@ -24,16 +24,13 @@ Options:
 
 """
 
+# for Python 3 compatibility
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
-from future.builtins import dict
-from future.builtins import open
-from future import standard_library
 
 import requests
-import urllib
 import os
 import re
 import json
@@ -42,17 +39,23 @@ import mimetypes
 from docopt import docopt
 from bs4 import BeautifulSoup
 try:
-    from edimensionpkg import utilities as ut
-except ImportError:
     import utilities as ut
+except ImportError:
+    from edimensionpkg import utilities as ut
 
-standard_library.install_aliases()
+# for Python 3 compatibility
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse
+
 
 mimetypes.init()
 
 QUIET = False
 
-class EDimensionDownloader(object):
+
+class EDimensionDownloader:
 
     def __init__(self, username, password, dirname,
                  jsonfile="cache.json",
@@ -113,7 +116,7 @@ class EDimensionDownloader(object):
         search_res = re.search("'action=.+?'", script)
         parameters = search_res.group(0)[1:-1]
         # format parameters
-        parameters = urllib.parse.parse_qs(parameters)
+        parameters = urlparse.parse_qs(parameters)
         parameters = {key: parameters[key][0] for key in parameters}
 
         # get course list xml
@@ -165,7 +168,7 @@ class EDimensionDownloader(object):
         return r
 
     def new_urljoin(self, url1, url2):
-        return urllib.parse.urljoin(str(url1), str(url2))
+        return urlparse.urljoin(str(url1), str(url2))
 
     def _courseListingSearch(self, soup, indent=0):
         """
@@ -305,7 +308,7 @@ class EDimensionDownloader(object):
                         else:
                             filename = os.path.join(absdir, text_file)
 
-                        with open(filename, "wb") as out_file:
+                        with codecs.open(filename, "wb") as out_file:
                             r.raw.decode_content = True
                             ut.copyfileobjprint(
                                 r.raw, out_file)

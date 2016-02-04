@@ -1,6 +1,7 @@
-import edimdownloader
+import edimensionpkg
 from docopt import docopt
 
+edimdownloader = edimensionpkg.edimdownloader
 
 def main(args=None):
     EDException = edimdownloader.EDException
@@ -10,11 +11,12 @@ def main(args=None):
     JSONFILE = "cache.json"
 
     doc_arguments = docopt(
-        edimdownloader.__doc__, version="E Dimension Downloader 1.0.0")
+        edimdownloader.__doc__,
+        version="E Dimension Downloader " + edimensionpkg.__version__)
 
     if doc_arguments["--quiet"]:
         edimdownloader.QUIET = True
-        
+
     if doc_arguments["<username>"]:
         USERNAME = doc_arguments["<username>"]
     else:

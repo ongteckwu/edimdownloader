@@ -39,8 +39,7 @@ setup(
 
     keywords='sutd edimension',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=["future",
-                      "requests",
+    install_requires=["requests",
                       "beautifulsoup4",
                       "docopt",
                       "lxml"],
