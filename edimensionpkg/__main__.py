@@ -1,7 +1,6 @@
 import edimensionpkg
 from docopt import docopt
-
-edimdownloader = edimensionpkg.edimdownloader
+import edimdownloader
 
 def main(args=None):
     EDException = edimdownloader.EDException
