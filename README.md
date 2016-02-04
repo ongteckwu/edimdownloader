@@ -1,6 +1,8 @@
 # Edimdownloader
 Terminal downloader for SUTD's 2016 [Edimension](https://www.edimension.sutd.edu.sg). 
 
+(Created on: 1 February 2016; Last updated: 4 February 2016)
+
 ##What it does
 `edimdownloader` downloads all your course-related documents and stores it in a nice folder-tree format.  
 
