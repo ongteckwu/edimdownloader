@@ -42,7 +42,7 @@ setup(
     install_requires=["requests",
                       "beautifulsoup4",
                       "docopt",
-                      "lxml"],
+                      "html5lib"],
     # extras_require={
     #     'dev': ['check-manifest'],
     #     'test': ['coverage'],

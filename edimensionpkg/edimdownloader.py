@@ -123,7 +123,7 @@ class EDimensionDownloader:
         r = self.req_with_check("post",
                                 self.webportalurl,
                                 data=parameters)
-        xml_soup = BeautifulSoup(r.text, "lxml")
+        xml_soup = BeautifulSoup(r.text, "html5lib")
         self._courseListingSearch(xml_soup)
 
         self._on_exit()
