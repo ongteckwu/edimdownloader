@@ -8,7 +8,7 @@ edimensionpkg/edtest
 __pycache__/
 *.so
 *~
-
+tests/
 
 # due to using tox and pytest
 .tox

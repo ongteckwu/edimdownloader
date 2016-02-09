@@ -101,7 +101,7 @@ class EDimensionDownloader:
         self.req_with_check("post",
                             self.new_urljoin(self.url,
                                              "/webapps/login/"),
-                            data=payload, message="Login success!")
+                            data=payload)
         ########################################
 
     def run(self):
@@ -110,7 +110,12 @@ class EDimensionDownloader:
                                 data={"tab_tab_group_id": "_1_1"})
         login_soup = BeautifulSoup(r.text, "html.parser")
         # get course listing ajax parameters
-        div3_1 = login_soup.select("#div_3_1")[0]
+        # temporary HACK
+        try:
+            div3_1 = login_soup.select("#div_3_1")[0]
+        except IndexError:
+            print("Incorrect username and Password")
+        print("Login Success")
         div_parent = div3_1.find_parent("div", recursive=False)
         script = div_parent.select("script")[0].getText()
         search_res = re.search("'action=.+?'", script)
@@ -141,13 +146,15 @@ class EDimensionDownloader:
         if not self.on_exit:
             self._on_exit()
 
-    def text_sanitize(self, text, width=75, placeholder="..."):
+    @classmethod
+    def text_sanitize(cls, text, width=75, placeholder="..."):
         text = text[:width]
         text = text + (placeholder if (len(text) >= width) else '')
         text = text.replace('/', '_').replace('\"', '')
         return text
 
-    def req_with_check(self, method, *args, **kwargs):
+    @classmethod
+    def req_with_check(cls, method, *args, **kwargs):
         # requests.get with error checking
         indent, message = 0, None
         if "message" in kwargs:
@@ -158,7 +165,12 @@ class EDimensionDownloader:
             indent = kwargs["indent"]
             kwargs.pop("indent", None)
 
-        r = getattr(self.session, method)(*args, **kwargs)
+        if getattr(cls, 'session', None):
+            # for instance usage (with session)
+            r = getattr(cls.session, method)(*args, **kwargs)
+        else:
+            # for class request usage
+            r = getattr(requests, method)(*args, **kwargs)
 
         if r.status_code != 200:
             r.raise_for_status()
@@ -167,7 +179,8 @@ class EDimensionDownloader:
                 ut.printWithIndent(message, indent, QUIET)
         return r
 
-    def new_urljoin(self, url1, url2):
+    @classmethod
+    def new_urljoin(cls, url1, url2):
         return urlparse.urljoin(str(url1), str(url2))
 
     def _courseListingSearch(self, soup, indent=0):
