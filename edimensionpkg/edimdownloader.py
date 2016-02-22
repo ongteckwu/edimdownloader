@@ -148,9 +148,10 @@ class EDimensionDownloader:
 
     @classmethod
     def text_sanitize(cls, text, width=75, placeholder="..."):
-        text = text[:width]
-        text = text + (placeholder if (len(text) >= width) else '')
-        text = text.replace('/', '_').replace('\"', '')
+        if text:
+            text = text[:width]
+            text = text + (placeholder if (len(text) >= width) else '')
+            text = text.replace('/', '_').replace('\"', '')
         return text
 
     @classmethod
@@ -207,6 +208,8 @@ class EDimensionDownloader:
                 text = a.getText().strip()
                 # Format text
                 text = mod_name_format.findall(text)
+                if not text:
+                    continue
                 text = self.text_sanitize(text[-1][2:])
 
                 # Make dir for each course and access
