@@ -36,6 +36,7 @@ import re
 import json
 import codecs
 import mimetypes
+import sys
 from docopt import docopt
 from bs4 import BeautifulSoup
 try:
@@ -101,7 +102,7 @@ class EDimensionDownloader:
         self.req_with_check("post",
                             self.new_urljoin(self.url,
                                              "/webapps/login/"),
-                            data=payload)
+                            data=payload, message="Login success!")
         ########################################
 
     def run(self):
@@ -110,12 +111,11 @@ class EDimensionDownloader:
                                 data={"tab_tab_group_id": "_1_1"})
         login_soup = BeautifulSoup(r.text, "html.parser")
         # get course listing ajax parameters
-        # temporary HACK
         try:
             div3_1 = login_soup.select("#div_3_1")[0]
-        except IndexError:
-            print("Incorrect username and Password")
-        print("Login Success")
+        except:
+            print("Username or PW is wrong.")
+            sys.exit(2)
         div_parent = div3_1.find_parent("div", recursive=False)
         script = div_parent.select("script")[0].getText()
         search_res = re.search("'action=.+?'", script)
@@ -146,15 +146,14 @@ class EDimensionDownloader:
         if not self.on_exit:
             self._on_exit()
 
-    @classmethod
-    def text_sanitize(cls, text, width=75, placeholder="..."):
-        text = text[:width]
-        text = text + (placeholder if (len(text) >= width) else '')
-        text = text.replace('/', '_').replace('\"', '')
+    def text_sanitize(self, text, width=75, placeholder="..."):
+        if text:
+            text = text[:width]
+            text = text + (placeholder if (len(text) >= width) else '')
+            text = text.replace('/', '_').replace('\"', '')
         return text
 
-    @classmethod
-    def req_with_check(cls, method, *args, **kwargs):
+    def req_with_check(self, method, *args, **kwargs):
         # requests.get with error checking
         indent, message = 0, None
         if "message" in kwargs:
@@ -165,12 +164,7 @@ class EDimensionDownloader:
             indent = kwargs["indent"]
             kwargs.pop("indent", None)
 
-        if getattr(cls, 'session', None):
-            # for instance usage (with session)
-            r = getattr(cls.session, method)(*args, **kwargs)
-        else:
-            # for class request usage
-            r = getattr(requests, method)(*args, **kwargs)
+        r = getattr(self.session, method)(*args, **kwargs)
 
         if r.status_code != 200:
             r.raise_for_status()
@@ -179,8 +173,7 @@ class EDimensionDownloader:
                 ut.printWithIndent(message, indent, QUIET)
         return r
 
-    @classmethod
-    def new_urljoin(cls, url1, url2):
+    def new_urljoin(self, url1, url2):
         return urlparse.urljoin(str(url1), str(url2))
 
     def _courseListingSearch(self, soup, indent=0):
@@ -207,6 +200,8 @@ class EDimensionDownloader:
                 text = a.getText().strip()
                 # Format text
                 text = mod_name_format.findall(text)
+                if not text:
+                    continue
                 text = self.text_sanitize(text[-1][2:])
 
                 # Make dir for each course and access
