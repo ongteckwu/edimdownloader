@@ -146,7 +146,12 @@ class EDimensionDownloader:
         if not self.on_exit:
             self._on_exit()
 
+<<<<<<< HEAD
     def text_sanitize(self, text, width=75, placeholder="..."):
+=======
+    @classmethod
+    def text_sanitize(cls, text, width=75, placeholder="..."):
+>>>>>>> c722f2891e3429f2e2f4e5c1d74405c8d30a20d7
         if text:
             text = text[:width]
             text = text + (placeholder if (len(text) >= width) else '')
