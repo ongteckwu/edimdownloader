@@ -167,7 +167,11 @@ class EDimensionDownloader:
         r = getattr(self.session, method)(*args, **kwargs)
 
         if r.status_code != 200:
-            r.raise_for_status()
+            try:
+                r.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+                print("Error: %s" % e)
+                print("Ignored...")
         else:
             if message:
                 ut.printWithIndent(message, indent, QUIET)
